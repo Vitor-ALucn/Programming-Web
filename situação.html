@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque</title>
+    <script>
+        let saldo;
+        function iniciarSistema() {
+            // Solicita saldo inicial até que um valor válido seja informado
+            while (true) {
+                saldo = parseInt(prompt("Informe o saldo inicial da peça:"));
+                if (!isNaN(saldo) && saldo >= 0) break;
+                alert("Valor inválido. Por favor, insira um número positivo ou zero.");
+            }
+            // Loop principal do sistema
+            while (true) {
+                const tipo = prompt("Digite:\n1 - Compra\n2 - Venda\nQualquer outra tecla - Sair");
+                                if (tipo !== '1' && tipo !== '2') break;
+                const qtd = parseInt(prompt("Informe a quantidade de peças:"));
+                if (isNaN(qtd) || qtd <= 0) {
+                    alert("Quantidade inválida.");
+                    continue;
+                }
+                if (tipo === '1') {
+                    saldo += qtd;
+                } else {
+                    if (qtd > saldo) {
+                        alert("Saldo insuficiente.");
+                        continue;
+                    }
+                    saldo -= qtd;
+                }
+                alert(`Saldo atual: ${saldo}`);
+            }
+            alert("Sistema encerrado.");
+        }
+        window.onload = iniciarSistema;
+    </script>
+</head>
+<body>
+    <h1>Controle de Estoque</h1>
+    <p>Abrindo sistema... Interaja com os prompts.</p>
+</body>
+</html>
